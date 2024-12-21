@@ -1,0 +1,140 @@
+/* Основні стилі */
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  h1, h2, p {
+    margin: 0;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  header {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: #fff;
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  #search-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-radius: 30px;
+    margin: 1rem auto;
+    display: block;
+    font-size: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  header #user-section {
+    text-align: center;
+  }
+  
+  #user-section span {
+    font-weight: 600;
+  }
+  
+  /* Каталог */
+  #filter-section {
+    padding: 1rem 0;
+    background: #f4f4f4;
+  }
+  
+  .filter-container,
+  .bookmarks-container {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  #genre-filter {
+    padding: 0.5rem 1rem;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .bookmarks-container button {
+    padding: 0.5rem 1rem;
+    background: #FF9800;
+    color: #fff;
+    border: none;
+    margin: 0.2rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  .bookmarks-container button:hover {
+    background: #E67E00;
+    transform: scale(1.05);
+  }
+  
+  /* Книги */
+  .books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .book-card {
+    text-align: center;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .book-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .book-card img {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+  }
+  
+  .book-card p {
+    margin: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Читач */
+  .reader-container {
+    text-align: center;
+  }
+  
+  #book-title {
+    font-size: 1.5rem;
+    color: #4CAF50;
+  }
+  
+  #book-content {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.8;
+  }
+  
+  /* Футер */
+  footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  

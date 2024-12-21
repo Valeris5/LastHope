@@ -1,0 +1,70 @@
+
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн Книгарня</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <h1>📚 Онлайн Книгарня</h1>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="🔍 Пошук книг..." aria-label="Пошук книг">
+      </div>
+      <div id="user-section">
+        <span id="current-user">👤 <span id="user-name">Гість</span></span>
+        <button id="login-button" aria-label="Увійти">Увійти</button>
+        <button id="logout-button" class="hidden" aria-label="Вийти">Вийти</button>
+      </div>
+    </div>
+  </header>
+  
+  <main>
+    <section id="filter-section">
+      <div class="container">
+        <div class="filter-container">
+          <label for="genre-filter">📖 Жанр:</label>
+          <select id="genre-filter" aria-label="Фільтрувати за жанром">
+            <option value="">Усі жанри</option>
+            <option value="історія">Історія</option>
+            <option value="фантастика">Фантастика</option>
+            <option value="класика">Класика</option>
+            <option value="драма">Драма</option>
+            <option value="романтика">Романтика</option>
+            <option value="детектив">Детектив</option>
+            <option value="психологія">Психологія</option>
+          </select>
+        </div>
+        <div class="bookmarks-container">
+          <button data-bookmark="читаю">Читаю</button>
+          <button data-bookmark="у планах">У планах</button>
+          <button data-bookmark="прочитане">Прочитане</button>
+        
+    </section>
+
+    <section id="catalog" class="container">
+      <div id="book-list" class="books-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="reader" class="hidden">
+      <div class="container reader-container">
+        <button id="back-to-catalog" aria-label="Назад до каталогу">⬅ Назад</button>
+        <h2 id="book-title"></h2>
+        <p id="book-content"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2024 Онлайн Книгарня | Розроблено з ❤️ для книгоманів</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
