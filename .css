@@ -1,140 +1,392 @@
-/* Основні стилі */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&family=Roboto:wght@400&display=swap');
+
+/* Стилі для шапки */
+header {
+    background-color: #333;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Стилізація для тексту "Онлайн Книгарня" */
+header h1 {
+    font-size: 3rem; /* Більший розмір шрифту */
+    font-weight: 600; /* Товстіший шрифт */
+    letter-spacing: 2px; /* Розширення між літерами */
+    text-transform: uppercase; /* Великі літери */
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4); /* Тінь для тексту */
+    transition: all 0.3s ease;
+}
+
+/* Ефект на ховері для шапки */
+header h1:hover {
+    color: #ff8c00; /* Колір тексту при наведенні */
+    text-shadow: 2px 2px 15px rgba(255, 140, 0, 0.7); /* Яскравіша тінь при наведенні */
+}
+
+/* Додаткові стилі для шапки */
+header {
+    background-color: #333;
+    padding: 20px 0;
+}
+
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background: #fff;
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  h1, h2, p {
-    margin: 0;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-  
-  header {
-    background: linear-gradient(135deg, #4CAF50, #45a049);
-    color: #fff;
-    padding: 1.5rem 0;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  header h1 {
-    font-size: 2rem;
-    text-align: center;
-  }
-  
-  #search-input {
-    width: 100%;
-    max-width: 600px;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-radius: 30px;
-    margin: 1rem auto;
-    display: block;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  header #user-section {
-    text-align: center;
-  }
-  
-  #user-section span {
-    font-weight: 600;
-  }
-  
-  /* Каталог */
-  #filter-section {
-    padding: 1rem 0;
-    background: #f4f4f4;
-  }
-  
-  .filter-container,
-  .bookmarks-container {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
-  
-  #genre-filter {
-    padding: 0.5rem 1rem;
-    border: 2px solid #4CAF50;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
-  
-  .bookmarks-container button {
-    padding: 0.5rem 1rem;
-    background: #FF9800;
-    color: #fff;
-    border: none;
-    margin: 0.2rem;
-    border-radius: 4px;
+}
+
+
+ /* Основний стиль кнопок */
+        .action-button {
+            background-color: #ff8c00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .action-button:hover {
+            background-color: #ff6a00;
+        }
+
+        /* Модальне вікно */
+        .modal {
+            display: none; /* Приховано за замовчуванням */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Контент модального вікна */
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Кнопка закриття */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        /* Стиль форм */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input {
+            margin-top: 5px;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color:#ff8c00 ;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #ff8c00;
+        }
+
+ .user-account {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 16px;
+            color: #333;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+/* Контейнер для пошукової форми */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+/* Стиль для пошукової форми */
+.search-form {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 50px;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 80%; /* Може бути змінено для різних розмірів екрану */
+    max-width: 500px; /* Максимальна ширина форми */
     transition: all 0.3s ease;
-  }
-  
-  .bookmarks-container button:hover {
-    background: #E67E00;
-    transform: scale(1.05);
-  }
-  
-  /* Книги */
-  .books-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-  }
-  
-  .book-card {
-    text-align: center;
+}
+
+/* Стиль для текстового поля пошуку */
+.search-form input[type="text"] {
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 25px;
+    width: 100%; /* Всі доступні місце для тексту */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+/* Стиль для кнопки пошуку */
+.search-form button {
+    background-color: #ff8c00;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border-radius: 25px;
     cursor: pointer;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .book-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .book-card img {
+    transition: all 0.3s ease;
+}
+
+/* Ефект на кнопці при наведенні */
+.search-form button:hover {
+    background-color: #ff6a00;
+}
+
+/* Ефект при фокусуванні на полі вводу */
+.search-form input[type="text"]:focus {
+    box-shadow: 0 0 5px rgba(255, 140, 0, 0.7);
+    border-color: #ff8c00;
+}
+
+
+#filters {
+    padding: 1rem;
+    margin: 1rem;
+}
+
+#books {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2rem;
+}
+
+.book {
+    background-color: white;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.book-img {
     width: 100%;
-    border-radius: 8px 8px 0 0;
-  }
-  
-  .book-card p {
-    margin: 0.5rem;
-    font-size: 0.9rem;
-  }
-  
-  /* Читач */
-  .reader-container {
+    height: auto;
+}
+
+#filters {
+    padding: 1rem;
+    margin: 1rem;
     text-align: center;
-  }
-  
-  #book-title {
-    font-size: 1.5rem;
-    color: #4CAF50;
-  }
-  
-  #book-content {
-    font-size: 1.1rem;
+}
+
+#genreFilter {
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    border: 2px solid #333;
+    background-color: #f4f4f4;
+    color: #333;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+
+/* styles.css */
+
+/* Стиль для контейнера фільтру жанрів */
+.genre-filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0;
+    background-color: #f5f5f5;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-label {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Стиль для селекту жанрів */
+.genre-select {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Ефект на селект при ховері */
+.genre-select:hover {
+    border-color: #ff8c00;
+}
+
+/* Кнопка пошуку */
+.genre-select:focus {
+    border-color: #ff8c00;
+    box-shadow: 0 0 5px rgba(255, 140, 0, 0.7);
+}
+
+/* Стилі для списку книг */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+/* Стиль для окремої книги */
+.book-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* При наведенні на книгу */
+.book-item:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Фото книги */
+.book-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Короткий опис */
+.book-item p {
+    font-size: 1rem;
     color: #555;
-    line-height: 1.8;
-  }
-  
-  /* Футер */
-  footer {
-    background: #333;
+    margin: 10px 0;
+}
+
+/* Кнопка для читання книги */
+.book-item a {
+    background-color: #ff8c00;
     color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+/* При наведенні на кнопку */
+.book-item a:hover {
+    background-color: #ff6a00;
+}
+
+
+
+/* Футер */
+footer {
+    background: linear-gradient(to right, #333, #555); /* Градієнт для футера */
+    color: white;
+    padding: 2rem 0;
     text-align: center;
-    padding: 1rem 0;
-  }
-  
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+
+/* Стиль для тексту футера */
+footer p {
+    font-size: 1.2rem;
+    margin: 0;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+/* Зміна прозорості при ховері */
+footer p:hover {
+    opacity: 1;
+}
+
+/* Стилізація для соціальних іконок (якщо ви хочете додати їх) */
+footer .social-icons {
+    margin-top: 1rem;
+}
+
+footer .social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+footer .social-icons a:hover {
+    color: #ff8c00; /* Оранжевий колір при наведенні */
+}
+
+/* Стилі для футера в мобільному вигляді */
+@media (max-width: 768px) {
+    footer p {
+        font-size: 1rem;
+    }
+
+    footer .social-icons {
+        margin-top: 0.5rem;
+    }
+}
