@@ -1,116 +1,186 @@
-// Книги
+/ Масив книг з фото, описами та можливістю читати
 const books = [
-    { id: 1, title: "Мистецтво війни", content: "Текст про стратегію війни...", genre: "історія", image: "https://via.placeholder.com/150?text=Мистецтво+війни" },
-    { id: 2, title: "1984", content: "Антиутопія Джорджа Орвелла...", genre: "фантастика", image: "https://via.placeholder.com/150?text=1984" },
-    { id: 3, title: "Кобзар", content: "Поезії Тараса Шевченка...", genre: "класика", image: "https://via.placeholder.com/150?text=Кобзар" },
-    { id: 4, title: "Гаррі Поттер", content: "Юний чарівник і його пригоди...", genre: "фантастика", image: "https://via.placeholder.com/150?text=Гаррі+Поттер" },
-  ];
-  
-  let bookmarks = JSON.parse(localStorage.getItem("bookmarks")) || { читаю: [], "у планах": [], прочитане: [] };
-  
-  const bookListEl = document.getElementById("book-list");
-  const searchInput = document.getElementById("search-input");
-  const genreFilter = document.getElementById("genre-filter");
-  const readerSection = document.getElementById("reader");
-  const catalogSection = document.getElementById("catalog");
-  const bookTitleEl = document.getElementById("book-title");
-  const bookContentEl = document.getElementById("book-content");
-  const backToCatalogButton = document.getElementById("back-to-catalog");
-  
-  // Користувач
-  const currentUserEl = document.getElementById("current-user");
-  const loginButton = document.getElementById("login-button");
-  const logoutButton = document.getElementById("logout-button");
-  const loginModal = document.getElementById("login-modal");
-  let currentUser = localStorage.getItem("currentUser") || "Гість";
-  
-  // Оновлення користувача
-  function updateUser() {
-    currentUserEl.textContent = `👤 ${currentUser}`;
-    loginButton.classList.toggle("hidden", currentUser !== "Гість");
-    logoutButton.classList.toggle("hidden", currentUser === "Гість");
-  }
-  
-  // Авторизація
-  loginButton.addEventListener("click", () => {
-    const username = prompt("Введіть ваше ім'я");
-    if (username) {
-      currentUser = username;
-      localStorage.setItem("currentUser", username);
-      updateUser();
+    {
+        title: "Великий роман",
+        genre: "fiction",
+        image: "path/to/book1.jpg",  // Заміни на реальну адресу зображення
+        description: "Це захоплюючий роман про подорожі та пригоди.",
+        link: "book1.html"  // Сторінка з повним текстом книги
+    },
+    {
+        title: "Наука для всіх",
+        genre: "science",
+        image: "path/to/book2.jpg",
+        description: "Книга, яка пояснює складні наукові концепти простими словами.",
+        link: "book2.html"
+    },
+    {
+        title: "Історія України",
+        genre: "history",
+        image: "path/to/book3.jpg",
+        description: "Повний огляд історії України від найдавніших часів до сьогодення.",
+        link: "book3.html"
+    },
+    {
+        title: "Магія і мечі",
+        genre: "fantasy",
+        image: "path/to/book4.jpg",
+        description: "Фентезійний роман про світ магії та великих битв.",
+        link: "book4.html"
+    },
+    {
+        title: "Детектив на ніч",
+        genre: "mystery",
+        image: "path/to/book5.jpg",
+        description: "Захоплюючий детектив, що тримає в напрузі до останньої сторінки.",
+        link: "book5.html"
+    },
+    {
+        title: "Любов під зорями",
+        genre: "romance",
+        image: "path/to/book6.jpg",
+        description: "Романтика, що розповідає про велике кохання та випробування долі.",
+        link: "book6.html"
     }
-  });
-  
-  logoutButton.addEventListener("click", () => {
-    localStorage.removeItem("currentUser");
-    currentUser = "Гість";
-    updateUser();
-  });
-  
-  // Генерація карток книг
-  function generateBookCards(filteredBooks) {
-    bookListEl.innerHTML = "";
-    filteredBooks.forEach((book) => {
-      const card = document.createElement("div");
-      card.className = "book-card";
-      card.innerHTML = `
-        <img src="${book.image}" alt="${book.title}">
-        <p>${book.title}</p>
-        <button data-id="${book.id}" class="bookmark-btn">+ Закладка</button>
-      `;
-      card.querySelector(".bookmark-btn").addEventListener("click", () => addBookmark(book));
-      card.addEventListener("click", () => openReader(book));
-      bookListEl.appendChild(card);
+];
+
+// Отримуємо елементи DOM
+const genreSelect = document.getElementById('genre-select');
+const bookList = document.getElementById('book-list');
+
+// Функція для рендеру книг
+function renderBooks(filteredBooks) {
+    bookList.innerHTML = ''; // Очищаємо список перед рендером
+    filteredBooks.forEach(book => {
+        const bookItem = document.createElement('div');
+        bookItem.classList.add('book-item');
+
+        // Створення елементів для кожної книги
+        bookItem.innerHTML = `
+            <img src="${book.image}" alt="${book.title}">
+            <h3>${book.title}</h3>
+            <p>${book.description}</p>
+            <a href="${book.link}" target="_blank">Читати книгу</a>
+        `;
+
+        bookList.appendChild(bookItem);
     });
-  }
-  
-  // Відкриття читача
-  function openReader(book) {
-    catalogSection.classList.add("hidden");
-    readerSection.classList.remove("hidden");
-    bookTitleEl.textContent = book.title;
-    bookContentEl.textContent = book.content;
-  }
-  
-  // Закриття читача
-  backToCatalogButton.addEventListener("click", () => {
-    readerSection.classList.add("hidden");
-    catalogSection.classList.remove("hidden");
-  });
-  
-  // Фільтр
-  function filterBooks() {
-    const searchQuery = searchInput.value.toLowerCase();
-    const selectedGenre = genreFilter.value;
-    const filteredBooks = books.filter((book) => {
-      const matchesSearch = book.title.toLowerCase().includes(searchQuery);
-      const matchesGenre = selectedGenre ? book.genre === selectedGenre : true;
-      return matchesSearch && matchesGenre;
-    });
-    generateBookCards(filteredBooks);
-  }
-  
-  // Додавання закладок
-  function addBookmark(book) {
-    const status = prompt("Виберіть статус для книги: читаю, у планах, прочитане").toLowerCase();
-    if (["читаю", "у планах", "прочитане"].includes(status)) {
-      if (!bookmarks[status].some((b) => b.id === book.id)) {
-        bookmarks[status].push(book);
-        localStorage.setItem("bookmarks", JSON.stringify(bookmarks));
-        alert(`Додано до "${status}"!`);
-      } else {
-        alert("Книга вже у цьому списку!");
-      }
+}
+
+// Функція фільтрації за жанром
+function filterBooks() {
+    const selectedGenre = genreSelect.value;
+
+    if (selectedGenre) {
+        const filteredBooks = books.filter(book => book.genre === selectedGenre);
+        renderBooks(filteredBooks);
     } else {
-      alert("Невірний статус!");
+        renderBooks(books); // Якщо жанр не вибрано, відображаємо всі книги
     }
-  }
-  
-  // Слухачі подій
-  searchInput.addEventListener("input", filterBooks);
-  genreFilter.addEventListener("change", filterBooks);
-  
-  // Початкова ініціалізація
-  updateUser();
-  generateBookCards(books);
+}
+
+// Додаємо обробник події на зміну значення селекту
+genreSelect.addEventListener('change', filterBooks);
+
+// Спочатку відображаємо всі книги
+renderBooks(books);
+
+
+// Функція для відкриття книги
+function openBook(bookFile) {
+    window.open(bookFile, '_blank');
+}
+
+// Перевіряємо, чи є форма пошуку на сторінці
+const searchForm = document.querySelector('.search-form');
+const searchInput = document.querySelector('.search-form input[type="text"]');
+const searchButton = document.querySelector('.search-form button');
+
+// Функція для обробки пошуку
+function handleSearch(event) {
+    event.preventDefault(); // Запобігаємо стандартній відправці форми
+
+    const query = searchInput.value.trim(); // Отримуємо значення з поля вводу та прибираємо зайві пробіли
+
+    if (query.length > 0) {
+        // Тут можна додати логіку для відображення результатів пошуку
+        // Наприклад, редірект на іншу сторінку з результатами пошуку
+        console.log('Шукаємо:', query);
+        
+        // Для демонстрації можна відкрити нову сторінку з параметром пошуку
+        window.location.href = `search-results.html?query=${encodeURIComponent(query)}`;
+    } else {
+        alert('Будь ласка, введіть текст для пошуку.');
+    }
+}
+
+// Додаємо обробник події на кнопку пошуку
+searchButton.addEventListener('click', handleSearch);
+
+// Додаємо можливість натискати Enter для відправки форми
+searchInput.addEventListener('keypress', function(event) {
+    if (event.key === 'Enter') {
+        handleSearch(event);
+    }
+});
+ // Отримання елементів
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const closeRegister = document.getElementById('closeRegister');
+        const authButtons = document.getElementById('authButtons');
+        const userAccount = document.getElementById('userAccount');
+        const userName = document.getElementById('userName');
+
+        // Відкрити модальне вікно входу
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'block';
+        });
+
+        // Відкрити модальне вікно реєстрації
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'block';
+        });
+
+        // Закрити модальне вікно входу
+        closeLogin.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        // Закрити модальне вікно реєстрації
+        closeRegister.addEventListener('click', () => {
+            registerModal.style.display = 'none';
+        });
+
+        // Закрити модальне вікно при кліку поза ним
+        window.addEventListener('click', (event) => {
+            if (event.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+            if (event.target === registerModal) {
+                registerModal.style.display = 'none';
+            }
+        });
+
+        // Обробка форми входу
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            authButtons.style.display = 'none';
+            userAccount.style.display = 'block';
+            userName.textContent = email.split('@')[0];
+            loginModal.style.display = 'none';
+        });
+
+        // Обробка форми реєстрації
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('registerName').value;
+            authButtons.style.display = 'none';
+            userAccount.style.display = 'block';
+            userName.textContent = name;
+            registerModal.style.display = 'none';
+        });
   
