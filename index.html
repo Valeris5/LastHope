@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Онлайн Книгарня</title>
-  </head>
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <header>
         <h1>Онлайн Книгарня</h1>
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
         <div>
             <button id="dark-mode-toggle">Змінити тему</button>
             <button id="login">Увійти</button>
@@ -18,36 +17,33 @@
     </header>
 
     <div class="filter-section">
-        <input type="text" id="search" class="search-bar" placeholder="Пошук ">
-        <div class="filters">
-            <select id="genre-filter">
-                <option value="">Всі жанри</option>
-                <option value="Фантастика">Фантастика</option>
-                <option value="Детектив">Детектив</option>
-                <option value="Роман">Роман</option>
-                <option value="Пригоди">Пригоди</option>
-                <option value="Історична">Історична</option>
-                <option value="Фентезі">Фентезі</option>
-                <option value="Трилер">Трилер</option>
-                <option value="Дитяча">Дитяча</option>
-                <option value="Наукова">Наукова</option>
-                <option value="Мемуари">Мемуари</option>
-            </select>
-        </div>
+        <input type="text" id="search-input" class="search-bar" placeholder="Пошук">
+        <select id="genre-filter">
+            <option value="">Всі жанри</option>
+            <option value="Фантастика">Фантастика</option>
+            <option value="Детектив">Детектив</option>
+            <option value="Роман">Роман</option>
+            <option value="Пригоди">Пригоди</option>
+            <option value="Історична">Історична</option>
+            <option value="Фентезі">Фентезі</option>
+            <option value="Трилер">Трилер</option>
+            <option value="Дитяча">Дитяча</option>
+            <option value="Наукова">Наукова</option>
+        </select>
     </div>
 
+    <div id="books-container"></div>
 
-    <div class="books-container" id="books-container">
-     
     <footer>
         <p>&copy; 2025 Онлайн Книгарня</p>
     </footer>
+
     <div id="modal">
         <h2 id="modal-title"></h2>
         <form id="auth-form">
             <input type="email" id="email" placeholder="Електронна пошта" required>
             <input type="password" id="password" placeholder="Пароль" required>
-            <input type="password" id="confirm-password" placeholder="Підтвердьте пароль" style="display: none;" required>
+            <input type="password" id="confirm-password" placeholder="Підтвердьте пароль" style="display: none;">
             <button type="submit">Підтвердити</button>
         </form>
     </div>
