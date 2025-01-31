@@ -164,12 +164,7 @@ background-color: #0056b3;
     color: #6200ea;
     pointer-events: none;
 }
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #6200ea;
-    color: white;
-}
+
 
 #modal {
     position: fixed;
@@ -263,4 +258,10 @@ transform: scale(1.05);
 }
 .audio-player {
 display: none; /* Приховуємо плеєр для користувача */
+}
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #6200ea;
+    color: white;
 }
